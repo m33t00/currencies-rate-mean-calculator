@@ -1,0 +1,30 @@
+{
+    "name": "stillalive/currency-rate-mean-provider",
+    "authors": [
+        {
+            "name": "Denis Makeev",
+            "email": "still@live.ru"
+        }
+    ],
+    "type": "library",
+
+    "require": {
+        "guzzlehttp/guzzle": "^6.5",
+        "ext-xmlreader": "*",
+        "ext-dom": "*"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "^9.1"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "StillAlive\\RateMeanCalculator\\": "src/",
+            "StillAlive\\RateMeanCalculator\\Tests\\": "tests/"
+        },
+        "files": [
+            "tests/TestHelpers.php"
+        ]
+    }
+}
