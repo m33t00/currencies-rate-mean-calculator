@@ -8,6 +8,7 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use StillAlive\RateMeanCalculator\Exceptions\BadProviderResponseFormatException;
 use StillAlive\RateMeanCalculator\Exceptions\ServiceUnavailableException;
+use StillAlive\RateMeanCalculator\Providers\CBRRateProvider;
 use StillAlive\RateMeanCalculator\Providers\RateProviderInterface;
 use StillAlive\RateMeanCalculator\Providers\RBCRateProvider;
 use function StillAlive\RateMeanCalculator\Tests\get_fixture_content;
@@ -97,5 +98,24 @@ class RBCRateProviderTest extends TestCase
 
         // assert
         $this->assertEquals($expectedRate, $actualRate($provider));
+    }
+
+    public function testUseSoftCache(): void
+    {
+        // arrange
+        $date = new \DateTime;
+        $responseMock = $this->createMock(Response::class);
+        $responseMock->method('getBody')->willReturn(
+            \GuzzleHttp\json_encode(['status' => 200, 'data' => ['rate1' => 99.99]])
+        );
+
+        $httpClient = $this->createMock(Client::class);
+        // expects
+        $httpClient->expects($this->once())->method('request')->willReturn($responseMock);
+
+        // act
+        $provider = new RBCRateProvider($httpClient);
+        $provider->getUSDRate($date);
+        $provider->getUSDRate($date);
     }
 }

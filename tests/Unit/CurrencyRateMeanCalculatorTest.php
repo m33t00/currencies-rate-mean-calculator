@@ -4,6 +4,7 @@ namespace StillAlive\RateMeanCalculator\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use StillAlive\RateMeanCalculator\CurrencyRateMeanCalculator;
+use StillAlive\RateMeanCalculator\Exceptions\IncorrectDateException;
 use StillAlive\RateMeanCalculator\Exceptions\NoProvidersSpecifiedException;
 use StillAlive\RateMeanCalculator\Providers\CBRRateProvider;
 use StillAlive\RateMeanCalculator\Providers\RBCRateProvider;
@@ -49,5 +50,20 @@ class CurrencyRateMeanCalculatorTest extends TestCase
         // assert
         $this->assertEquals($expectedUSDRateMean, $calculator->calculateUSDRateMean(new \DateTime));
         $this->assertEquals($expectedEURRateMean, $calculator->calculateEURRateMean(new \DateTime));
+    }
+
+    public function testExceptionOnIncorrectDate(): void
+    {
+        // arrange
+        $calculator = new CurrencyRateMeanCalculator(
+            $this->createMock(RBCRateProvider::class),
+            $this->createMock(CBRRateProvider::class)
+        );
+
+        // expects
+        $this->expectException(IncorrectDateException::class);
+
+        // act
+        $calculator->calculateEURRateMean(new \DateTime('+1 day'));
     }
 }

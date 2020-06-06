@@ -82,7 +82,10 @@ class RBCRateProvider implements RateProviderInterface
 
         self::ensureResponseDataIsValid($rateData);
 
-        return (float) $rateData['data']['rate1'];
+        $rate = (float) $rateData['data']['rate1'];
+        $this->cachedResponses[$currencyCode][self::formatDateTime($date)] =  (float) $rateData['data']['rate1'];
+
+        return $rate;
     }
 
     private static function formatDateTime(\DateTime $dateTime): string

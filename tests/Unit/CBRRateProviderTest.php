@@ -109,4 +109,23 @@ XML;
         // assert
         $this->assertEquals($expectedRate, $actualRate($provider));
     }
+
+    public function testUseSoftCache(): void
+    {
+        // arrange
+        $date = new \DateTime;
+        $responseMock = $this->createMock(Response::class);
+        $responseMock->method('getBody')->willReturn(
+            sprintf(self::XML_SAMPLE_PATTERN, CBRRateProvider::USD_ID, '99,99')
+        );
+
+        $httpClient = $this->createMock(Client::class);
+        // expects
+        $httpClient->expects($this->once())->method('request')->willReturn($responseMock);
+
+        // act
+        $provider = new CBRRateProvider($httpClient);
+        $provider->getUSDRate($date);
+        $provider->getUSDRate($date);
+    }
 }
