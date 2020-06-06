@@ -41,7 +41,7 @@ class RBCRateProviderTest extends TestCase
     /**
      * @dataProvider providerInvalidResponsePayloads
      */
-    public function testExceptionOnInvalidXMLResponse(string $responsePayload): void
+    public function testExceptionOnInvalidJSONResponse(string $responsePayload): void
     {
         // arrange
         $responseMock = $this->createMock(Response::class);

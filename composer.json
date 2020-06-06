@@ -1,5 +1,6 @@
 {
-    "name": "stillalive/currency-rate-mean-provider",
+    "name": "stillalive/currency-rate-mean-calculator",
+    "description": "Calculates average EUR and USD rate by given rate providers",
     "authors": [
         {
             "name": "Denis Makeev",
@@ -10,7 +11,7 @@
 
     "require": {
         "guzzlehttp/guzzle": "^6.5",
-        "ext-xmlreader": "*",
+        "ext-simplexml": "*",
         "ext-dom": "*"
     },
 
