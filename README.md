@@ -10,7 +10,7 @@
 
 ##### Coverage:
 
-`
+```
 PHPUnit 9.1.5 by Sebastian Bergmann and contributors.
  
  ................                                                  16 / 16 (100%)
@@ -44,4 +44,4 @@ PHPUnit 9.1.5 by Sebastian Bergmann and contributors.
    Methods: 100.00% ( 6/ 6)   Lines: 100.00% ( 28/ 28)
  StillAlive\RateMeanCalculator\Providers\RBCRateProvider
    Methods: 100.00% ( 6/ 6)   Lines: 100.00% ( 29/ 29)
-`
+```
